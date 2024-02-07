@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Navbar } from "@/app/(browse)/_components";
+import { Container, Navbar, Sidebar } from "@/app/(browse)/_components";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -8,7 +8,10 @@ type RootLayoutProps = {
 const BrowseLayout = ({ children }: RootLayoutProps) => (
   <>
     <Navbar />
-    <div className="flex h-full pt-20">{children}</div>
+    <div className="flex h-full pt-20">
+      <Sidebar />
+      <Container>{children}</Container>
+    </div>
   </>
 );
 
