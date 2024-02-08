@@ -1,4 +1,4 @@
-import { getRecommendedService } from "@/lib/recommendedServide";
+import { getRecommendedService } from "@/lib/recommendedService ";
 import {
   Recommended,
   RecommendedSkeleton,

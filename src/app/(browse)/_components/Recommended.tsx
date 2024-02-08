@@ -10,7 +10,7 @@ type RecommendedProps = {
 
 export const Recommended = ({ data }: RecommendedProps) => {
   const isOpen = useSidebar(({ isOpen }) => isOpen);
-  const showLabel = isOpen && data.length;
+  const showLabel = Boolean(isOpen && data.length);
 
   return (
     <div>

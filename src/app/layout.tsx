@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers";
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 type RootLayoutProps = {
@@ -30,6 +31,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
           forcedTheme="dark"
           storageKey="twitch-clone-theme"
         >
+          <Toaster theme="light" position="bottom-center" />
           {children}
         </ThemeProvider>
       </body>
