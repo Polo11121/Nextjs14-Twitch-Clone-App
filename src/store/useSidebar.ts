@@ -2,10 +2,12 @@ import { create } from "zustand";
 
 type SidebarState = {
   isOpen: boolean;
-  toggleHandler: () => void;
+  expandHandler: () => void;
+  collapseHandler: () => void;
 };
 
 export const useSidebar = create<SidebarState>((set) => ({
   isOpen: true,
-  toggleHandler: () => set((state) => ({ isOpen: !state.isOpen })),
+  expandHandler: () => set({ isOpen: true }),
+  collapseHandler: () => set({ isOpen: false }),
 }));

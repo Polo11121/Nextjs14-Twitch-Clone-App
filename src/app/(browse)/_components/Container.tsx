@@ -10,12 +10,18 @@ type ContainerProps = {
 };
 
 export const Container = ({ children }: ContainerProps) => {
-  const { isOpen, toggleHandler } = useSidebar((state) => state);
+  const { isOpen, collapseHandler, expandHandler } = useSidebar(
+    (state) => state
+  );
   const matches = useMediaQuery("(max-width: 1024px)");
 
   useEffect(() => {
-    toggleHandler();
-  }, [matches, toggleHandler]);
+    if (matches) {
+      collapseHandler();
+    } else {
+      expandHandler();
+    }
+  }, [matches, collapseHandler, expandHandler]);
 
   return (
     <div className={cn("flex-1", isOpen ? "ml-[70px] lg:ml-60" : "ml-[70px]")}>
