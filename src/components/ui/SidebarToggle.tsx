@@ -2,18 +2,23 @@
 
 import { ArrowLeftFromLine, ArrowRightFromLine } from "lucide-react";
 import { Button, Hint, Skeleton } from "@/components/ui";
-import { useSidebar } from "@/store";
+import { useSidebar } from "@/store/useSidebar";
+import { useCreatorSidebar } from "@/store/useCreatorSidebar";
 
-export const Toggle = () => {
-  const { isOpen, collapseHandler, expandHandler } = useSidebar(
-    (state) => state
-  );
+type ToggleProps = {
+  sidebarLabel: string;
+  store: "sidebar" | "creatorSidebar";
+};
+
+export const SidebarToggle = ({ sidebarLabel, store }: ToggleProps) => {
+  const useStore = store === "sidebar" ? useSidebar : useCreatorSidebar;
+  const { isOpen, collapseHandler, expandHandler } = useStore((state) => state);
 
   const label = isOpen ? "Collapse sidebar" : "Expand sidebar";
 
   return isOpen ? (
     <div className="p-3 pl-6 mb-2 flex items-center w-full">
-      <p className="font-semibold text-primary">For you</p>
+      <p className="font-semibold text-primary">{sidebarLabel}</p>
       <Hint label={label} side="right" asChild>
         <Button
           onClick={collapseHandler}
@@ -35,7 +40,7 @@ export const Toggle = () => {
   );
 };
 
-export const ToggleSkeleton = () => (
+export const SidebarToggleSkeleton = () => (
   <div className="p-3 pl-6 mb-2 hidden lg:flex items-center justify-between w-full">
     <Skeleton className="h-6 w-[100px]" />
     <Skeleton className="h-6 w-6" />

@@ -1,20 +1,25 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useSidebar } from "@/store";
 import { cn } from "@/lib/utils";
-import {
-  ToggleSkeleton,
-  RecommendedSkeleton,
-} from "@/app/(browse)/_components";
 import { useIsClient } from "usehooks-ts";
+import { useSidebar } from "@/store/useSidebar";
+import { useCreatorSidebar } from "@/store/useCreatorSidebar";
+import { SidebarToggleSkeleton } from "@/components/ui";
 
 type WrapperProps = {
   children: ReactNode;
+  store: "sidebar" | "creatorSidebar";
+  contentSkeleton: ReactNode;
 };
 
-export const Wrapper = ({ children }: WrapperProps) => {
-  const isOpen = useSidebar((state) => state.isOpen);
+export const SidebarWrapper = ({
+  children,
+  store,
+  contentSkeleton,
+}: WrapperProps) => {
+  const useStore = store === "sidebar" ? useSidebar : useCreatorSidebar;
+  const isOpen = useStore((state) => state.isOpen);
   const isClient = useIsClient();
 
   return isClient ? (
@@ -28,8 +33,8 @@ export const Wrapper = ({ children }: WrapperProps) => {
     </aside>
   ) : (
     <aside className="fixed left-0 flex flex-col w-[70px] lg:w-60 h-full bg-background border-r border-[#2D2E35] z-50">
-      <ToggleSkeleton />
-      <RecommendedSkeleton />
+      <SidebarToggleSkeleton />
+      {contentSkeleton}
     </aside>
   );
 };

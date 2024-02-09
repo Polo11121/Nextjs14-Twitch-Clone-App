@@ -1,10 +1,11 @@
 import { ReactNode, Suspense } from "react";
 import {
   Container,
-  Navbar,
+  NavbarActions,
   Sidebar,
   SidebarSkeleton,
 } from "@/app/(browse)/_components";
+import { Navbar } from "@/components/ui";
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -12,7 +13,9 @@ type RootLayoutProps = {
 
 const BrowseLayout = ({ children }: RootLayoutProps) => (
   <>
-    <Navbar />
+    <Navbar>
+      <NavbarActions />
+    </Navbar>
     <div className="flex h-full pt-20">
       <Suspense fallback={<SidebarSkeleton />}>
         <Sidebar />

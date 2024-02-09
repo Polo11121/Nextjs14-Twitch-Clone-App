@@ -1,7 +1,7 @@
 import { getCurrentDbUser } from "@/lib/authService";
 import { db } from "@/lib/db";
 
-export const getRecommendedService = async () => {
+export const getRecommendedUsers = async () => {
   let userId;
 
   try {
@@ -16,9 +16,31 @@ export const getRecommendedService = async () => {
   if (userId) {
     query = {
       where: {
-        NOT: {
-          id: userId,
-        },
+        AND: [
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
+          {
+            NOT: {
+              id: userId,
+            },
+          },
+          {
+            NOT: {
+              followedBy: {
+                some: {
+                  followerId: userId,
+                },
+              },
+            },
+          },
+        ],
       },
     };
   }
