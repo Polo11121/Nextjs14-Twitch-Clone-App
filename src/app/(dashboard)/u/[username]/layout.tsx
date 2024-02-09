@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/ui";
+import { ContentContainer, Navbar } from "@/components/ui";
 import { getCurrentDbUserByUsername } from "@/lib/authService";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
@@ -27,7 +27,7 @@ const CreatorLayout = async ({ params, children }: CreatorLayoutProps) => {
       </Navbar>
       <div className="flex h-full pt-20">
         <Sidebar />
-        {children}
+        <ContentContainer store="creatorSidebar">{children}</ContentContainer>
       </div>
     </>
   );

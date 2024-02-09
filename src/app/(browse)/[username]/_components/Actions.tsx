@@ -4,14 +4,15 @@ import { useTransition } from "react";
 import { follow, unfollow } from "@/actions/follow";
 import { Button } from "@/components/ui";
 import { toast } from "sonner";
-import { blockUser, unblockUser } from "@/lib/blockService";
+import { block, unblock } from "@/actions/block";
 
 type ActionsType = {
   isFollowing: boolean;
+  isBlocking: boolean;
   userId: string;
 };
 
-export const Actions = ({ isFollowing, userId }: ActionsType) => {
+export const Actions = ({ isFollowing, isBlocking, userId }: ActionsType) => {
   const [isPending, startTransition] = useTransition();
   const followHandler = () =>
     startTransition(async () => {
@@ -38,7 +39,7 @@ export const Actions = ({ isFollowing, userId }: ActionsType) => {
   const blockHandler = () =>
     startTransition(async () => {
       try {
-        await blockUser(userId);
+        await block(userId);
         toast.success("User has been blocked");
       } catch {
         toast.error("Failed to block user");
@@ -48,7 +49,7 @@ export const Actions = ({ isFollowing, userId }: ActionsType) => {
   const unblockHandler = () =>
     startTransition(async () => {
       try {
-        await unblockUser(userId);
+        await unblock(userId);
         toast.success("User has been unblocked");
       } catch {
         toast.error("Failed to unblock user");
@@ -64,8 +65,11 @@ export const Actions = ({ isFollowing, userId }: ActionsType) => {
       >
         {isFollowing ? "Unfollow" : "Follow"}
       </Button>
-      <Button onClick={blockHandler} disabled={isPending}>
-        Block
+      <Button
+        onClick={isBlocking ? unblockHandler : blockHandler}
+        disabled={isPending}
+      >
+        {isBlocking ? "Unblock" : "Block"}
       </Button>
     </>
   );

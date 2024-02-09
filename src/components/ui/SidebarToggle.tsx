@@ -5,12 +5,12 @@ import { Button, Hint, Skeleton } from "@/components/ui";
 import { useSidebar } from "@/store/useSidebar";
 import { useCreatorSidebar } from "@/store/useCreatorSidebar";
 
-type ToggleProps = {
+type SidebarToggleProps = {
   sidebarLabel: string;
   store: "sidebar" | "creatorSidebar";
 };
 
-export const SidebarToggle = ({ sidebarLabel, store }: ToggleProps) => {
+export const SidebarToggle = ({ sidebarLabel, store }: SidebarToggleProps) => {
   const useStore = store === "sidebar" ? useSidebar : useCreatorSidebar;
   const { isOpen, collapseHandler, expandHandler } = useStore((state) => state);
 

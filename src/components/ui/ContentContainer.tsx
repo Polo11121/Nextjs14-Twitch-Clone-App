@@ -2,17 +2,20 @@
 
 import { ReactNode, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useSidebar } from "@/store";
+import { useCreatorSidebar, useSidebar } from "@/store";
 import { cn } from "@/lib/utils";
 
-type ContainerProps = {
+type ContentContainerProps = {
   children: ReactNode;
+  store: "sidebar" | "creatorSidebar";
 };
 
-export const Container = ({ children }: ContainerProps) => {
-  const { isOpen, collapseHandler, expandHandler } = useSidebar(
-    (state) => state
-  );
+export const ContentContainer = ({
+  children,
+  store,
+}: ContentContainerProps) => {
+  const useStore = store === "sidebar" ? useSidebar : useCreatorSidebar;
+  const { isOpen, collapseHandler, expandHandler } = useStore((state) => state);
   const matches = useMediaQuery("(max-width: 1024px)");
 
   useEffect(() => {

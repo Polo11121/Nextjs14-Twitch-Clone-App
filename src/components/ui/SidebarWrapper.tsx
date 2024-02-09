@@ -7,7 +7,7 @@ import { useSidebar } from "@/store/useSidebar";
 import { useCreatorSidebar } from "@/store/useCreatorSidebar";
 import { SidebarToggleSkeleton } from "@/components/ui";
 
-type WrapperProps = {
+type SidebarWrapperProps = {
   children: ReactNode;
   store: "sidebar" | "creatorSidebar";
   contentSkeleton: ReactNode;
@@ -17,7 +17,7 @@ export const SidebarWrapper = ({
   children,
   store,
   contentSkeleton,
-}: WrapperProps) => {
+}: SidebarWrapperProps) => {
   const useStore = store === "sidebar" ? useSidebar : useCreatorSidebar;
   const isOpen = useStore((state) => state.isOpen);
   const isClient = useIsClient();

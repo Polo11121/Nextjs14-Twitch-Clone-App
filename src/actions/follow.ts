@@ -1,4 +1,4 @@
-("use server");
+"use server";
 
 import { followUser, unfollowUser } from "@/lib/followService";
 import { revalidatePath } from "next/cache";
