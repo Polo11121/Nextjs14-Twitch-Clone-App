@@ -11,21 +11,12 @@ export const getRecommendedUsers = async () => {
     userId = null;
   }
 
-  let query = {};
+  let users = [];
 
   if (userId) {
-    query = {
+    users = await db.user.findMany({
       where: {
         AND: [
-          {
-            NOT: {
-              blocking: {
-                some: {
-                  blockedId: userId,
-                },
-              },
-            },
-          },
           {
             NOT: {
               id: userId,
@@ -40,17 +31,56 @@ export const getRecommendedUsers = async () => {
               },
             },
           },
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
         ],
       },
-    };
+      include: {
+        stream: {
+          select: {
+            isLive: true,
+          },
+        },
+      },
+      orderBy: [
+        {
+          stream: {
+            isLive: "desc",
+          },
+        },
+        {
+          createdAt: "desc",
+        },
+      ],
+    });
+  } else {
+    users = await db.user.findMany({
+      include: {
+        stream: {
+          select: {
+            isLive: true,
+          },
+        },
+      },
+      orderBy: [
+        {
+          stream: {
+            isLive: "desc",
+          },
+        },
+        {
+          createdAt: "desc",
+        },
+      ],
+    });
   }
-
-  const users = await db.user.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    ...query,
-  });
 
   return users;
 };

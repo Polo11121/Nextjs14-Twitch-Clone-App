@@ -10,12 +10,12 @@ export const Search = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
 
-  const searchChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(e.target.value);
+  const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setValue(event.target.value);
   const clearHandler = () => setValue("");
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (!value) {
       return;
