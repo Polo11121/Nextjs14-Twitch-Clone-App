@@ -32,12 +32,12 @@ export const ChatForm = ({
   const isDisabled =
     isHidden || isFollowersOnlyAndNotFollowing || isDelayBlocked;
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) =>
-    onChange(e.target.value);
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>) =>
+    onChange(event.target.value);
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
 
     if (!value || isDisabled) {
       return;

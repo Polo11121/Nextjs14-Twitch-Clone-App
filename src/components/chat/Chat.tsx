@@ -9,7 +9,15 @@ import {
 import { ConnectionState } from "livekit-client";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { ChatForm, ChatHeader, ChatList } from "@/components/chat";
+import {
+  ChatCommunity,
+  ChatForm,
+  ChatFormSkeleton,
+  ChatHeader,
+  ChatHeaderSkeleton,
+  ChatList,
+  ChatListSkeleton,
+} from "@/components/chat";
 
 type ChatProps = {
   hostName: string;
@@ -81,10 +89,20 @@ export const Chat = ({
           />
         </>
       ) : (
-        <>
-          <p>Community</p>
-        </>
+        <ChatCommunity
+          viewerName={viewerName}
+          hostName={hostName}
+          isHidden={isHidden}
+        />
       )}
     </div>
   );
 };
+
+export const ChatSkeleton = () => (
+  <div className="flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2">
+    <ChatHeaderSkeleton />
+    <ChatListSkeleton />
+    <ChatFormSkeleton />
+  </div>
+);

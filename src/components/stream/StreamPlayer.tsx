@@ -4,8 +4,14 @@ import { useChatSidebar } from "@/store/useChatSidebar";
 import { LiveKitRoom } from "@livekit/components-react";
 import { useViewerToken } from "@/lib/viewerService";
 import { Stream, User } from "@prisma/client";
-import { Video } from "@/components/stream";
-import { Chat, ChatToggle } from "@/components/chat";
+import {
+  StreamHeader,
+  StreamHeaderSkeleton,
+  StreamInfoCard,
+  Video,
+} from "@/components/stream";
+import { Chat, ChatSkeleton, ChatToggle } from "@/components/chat";
+import { VideoSkeleton } from "@/components/stream";
 import { cn } from "@/lib/utils";
 
 type StreamPlayerProps = {
@@ -18,7 +24,7 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
   const { identity, name, token } = useViewerToken(user.id);
 
   if (!token || !identity || !name) {
-    return <div>Cannot watch the stream</div>;
+    return <StreamPlayerSkeleton />;
   }
 
   return (
@@ -38,6 +44,20 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
       >
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
           <Video hostName={user.username} hostIdentity={user.id} />
+          <StreamHeader
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            imageUrl={user.imageUrl}
+            isFollowing={isFollowing}
+            name={user?.stream?.name}
+          />
+          <StreamInfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={user.stream?.name}
+            thumbnailUrl={user.stream?.thumbnailUrl}
+          />
         </div>
         <div className={cn("col-span-1", !isOpen && "hidden")}>
           <Chat
@@ -54,3 +74,15 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
     </>
   );
 };
+
+export const StreamPlayerSkeleton = () => (
+  <div className="grid grid-cols1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
+    <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+      <VideoSkeleton />
+      <StreamHeaderSkeleton />
+    </div>
+    <div className="col-span-1 bg-background">
+      <ChatSkeleton />
+    </div>
+  </div>
+);

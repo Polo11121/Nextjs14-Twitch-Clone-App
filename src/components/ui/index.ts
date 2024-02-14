@@ -16,9 +16,11 @@ export {
 } from "@/components/ui/Dialog";
 export { Hint } from "@/components/ui/Hint";
 export { Input } from "@/components/ui/Input";
+export { Label } from "@/components/ui/Label";
 export { LiveBadge } from "@/components/ui/LiveBadge";
 export { Logo } from "@/components/ui/Logo";
 export { Navbar } from "@/components/ui/Navbar";
+export { ScrollArea } from "@/components/ui/ScrollArea";
 export { Search } from "@/components/ui/Search";
 export {
   Select,
@@ -32,6 +34,7 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 } from "@/components/ui/Select";
+export { Separator } from "@/components/ui/Separator";
 export {
   SidebarToggle,
   SidebarToggleSkeleton,
@@ -47,3 +50,4 @@ export {
   TooltipTrigger,
 } from "@/components/ui/Tooltip";
 export { UserAvatar, UserAvatarSkeleton } from "@/components/ui/UserAvatar";
+export { VerifiedMark } from "@/components/ui/VerifiedMark";
