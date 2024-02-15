@@ -5,6 +5,7 @@ import { LiveKitRoom } from "@livekit/components-react";
 import { useViewerToken } from "@/lib/viewerService";
 import { Stream, User } from "@prisma/client";
 import {
+  StreamAboutCard,
   StreamHeader,
   StreamHeaderSkeleton,
   StreamInfoCard,
@@ -15,7 +16,7 @@ import { VideoSkeleton } from "@/components/stream";
 import { cn } from "@/lib/utils";
 
 type StreamPlayerProps = {
-  user: User & { stream: Stream | null };
+  user: User & { stream: Stream | null; _count: { followedBy: number } };
   isFollowing: boolean;
 };
 
@@ -57,6 +58,13 @@ export const StreamPlayer = ({ user, isFollowing }: StreamPlayerProps) => {
             viewerIdentity={identity}
             name={user.stream?.name}
             thumbnailUrl={user.stream?.thumbnailUrl}
+          />
+          <StreamAboutCard
+            hostName={user.username}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            bio={user.bio}
+            followedByCount={user._count.followedBy}
           />
         </div>
         <div className={cn("col-span-1", !isOpen && "hidden")}>

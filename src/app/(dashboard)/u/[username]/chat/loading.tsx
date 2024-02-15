@@ -4,8 +4,8 @@ const ChatLoading = () => (
   <div className="p-6 space-y-4">
     <Skeleton className="h-10 w-[200px]" />
     <div className="space-y-4">
-      {[...Array(3)].map((_, i) => (
-        <Skeleton key={i} className="rounded-xl p-6 w-full" />
+      {[...Array(3)].map((_, index) => (
+        <Skeleton key={index} className="rounded-xl p-6 w-full" />
       ))}
     </div>
   </div>

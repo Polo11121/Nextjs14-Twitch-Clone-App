@@ -39,8 +39,8 @@ export const Followed = ({ data }: FollowedProps) => {
 
 export const FollowedSkeleton = () => (
   <ul className="px-2 p5-2 lg:pt-0">
-    {[...Array(3)].map((_, i) => (
-      <UserItemSkeleton key={i} />
+    {[...Array(3)].map((_, index) => (
+      <UserItemSkeleton key={index} />
     ))}
   </ul>
 );

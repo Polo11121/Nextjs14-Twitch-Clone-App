@@ -56,6 +56,7 @@ export const StreamInfoCard = ({
                   fill
                   src={thumbnailUrl}
                   alt={name || "stream thumbnail"}
+                  className="object-cover"
                 />
               </div>
             )}

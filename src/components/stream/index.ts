@@ -2,6 +2,8 @@ export { FullScreenControl } from "@/components/stream/FullScreenControl";
 export { LiveVideo } from "@/components/stream/LiveVideo";
 export { LoadingVideo } from "@/components/stream/LoadingVideo";
 export { OfflineVideo } from "@/components/stream/OfflineVideo";
+export { StreamAboutCard } from "@/components/stream/StreamAboutCard";
+export { StreamAboutModal } from "@/components/stream/StreamAboutModal";
 export { Slider } from "@/components/ui/Slider";
 export {
   StreamPlayer,
