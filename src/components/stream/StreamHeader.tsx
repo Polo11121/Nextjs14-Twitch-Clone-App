@@ -15,7 +15,7 @@ type StreamHeaderProps = {
   hostName: string;
   hostIdentity: string;
   viewerIdentity: string;
-  imageUrl: string;
+  imageUrl: string | null;
   isFollowing: boolean;
   name?: string;
 };

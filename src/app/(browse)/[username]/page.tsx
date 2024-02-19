@@ -1,6 +1,5 @@
-import { Actions } from "@/app/(browse)/[username]/_components";
 import { StreamPlayer } from "@/components/stream";
-import { isBlockingUser, isCurrentUserBlocked } from "@/lib/blockService";
+import { isCurrentUserBlocked } from "@/lib/blockService";
 import { isFollowingUser } from "@/lib/followService";
 import { getUserByUsername } from "@/lib/userService";
 import { notFound } from "next/navigation";
@@ -25,7 +24,6 @@ const UserPage = async ({ params }: UserPageProps) => {
   }
 
   const isFollowing = await isFollowingUser(user.id);
-  const isBlocking = await isBlockingUser(user.id);
 
   return <StreamPlayer user={user} isFollowing={isFollowing} />;
 };

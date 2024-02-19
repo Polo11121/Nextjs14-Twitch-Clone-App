@@ -1,10 +1,5 @@
 import { Thumbnail, ThumbnailSkeleton } from "@/app/(browse)/_components";
-import {
-  LiveBadge,
-  Skeleton,
-  UserAvatar,
-  UserAvatarSkeleton,
-} from "@/components/ui";
+import { Skeleton, UserAvatar, UserAvatarSkeleton } from "@/components/ui";
 import { User } from "@prisma/client";
 import Link from "next/link";
 
@@ -28,11 +23,6 @@ export const ResultCard = ({ data }: ResultCardProps) => (
         username={data.user.username}
       />
     </div>
-    {data.isLive && (
-      <div className="absolute top-2 left-2 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform">
-        <LiveBadge />
-      </div>
-    )}
     <div className="flex gap-3">
       <UserAvatar
         username={data.user.username}

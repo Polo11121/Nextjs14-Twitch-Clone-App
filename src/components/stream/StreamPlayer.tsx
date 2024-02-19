@@ -15,8 +15,27 @@ import { Chat, ChatSkeleton, ChatToggle } from "@/components/chat";
 import { VideoSkeleton } from "@/components/stream";
 import { cn } from "@/lib/utils";
 
+type CustomStream = {
+  id: string;
+  isChatDelayed: boolean;
+  isChatEnabled: boolean;
+  isChatFollowersOnly: boolean;
+  isLive: boolean;
+  name: string;
+  thumbnailUrl: string | null;
+};
+
+type CustomUser = {
+  id: string;
+  username: string;
+  bio: string | null;
+  stream: CustomStream | null;
+  imageUrl: string | null;
+  _count: { followedBy: number };
+};
+
 type StreamPlayerProps = {
-  user: User & { stream: Stream | null; _count: { followedBy: number } };
+  user: CustomUser;
   isFollowing: boolean;
 };
 
