@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/providers/ThemeProviderstsx"
+    "src/components/providers/ThemeProviderstsx",
+    "src/app/(dashboard)/u/[username]/community/_components/Columns.tsx"
   ],
   "exclude": ["node_modules"]
 }

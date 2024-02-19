@@ -23,12 +23,12 @@ export const StreamAboutModal = ({ initialValue }: StreamAboutModalProps) => {
   const [value, setValue] = useState(initialValue || "");
   const closeRef = useRef<ElementRef<typeof DialogClose>>(null);
 
-  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setValue(e.target.value);
+  const changeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setValue(event.target.value);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     try {
-      e.preventDefault();
+      event.preventDefault();
       startTransition(async () => {
         await updateUser({ bio: value });
         toast("User bio updated");

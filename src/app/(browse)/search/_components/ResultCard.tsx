@@ -4,8 +4,13 @@ import { Skeleton, VerifiedMark } from "@/components/ui";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
+type CustomStream = Pick<
+  Stream,
+  "id" | "thumbnailUrl" | "isLive" | "updatedAt" | "name"
+>;
+
 type ResultCardProps = {
-  data: Stream & { user: User };
+  data: CustomStream & { user: User };
 };
 
 export const ResultCard = ({ data }: ResultCardProps) => (

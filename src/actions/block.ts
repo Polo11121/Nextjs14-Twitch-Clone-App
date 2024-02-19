@@ -29,9 +29,11 @@ export const block = async (id: string) => {
 };
 
 export const unblock = async (id: string) => {
+  const currentDbUser = await getCurrentDbUser();
   const unblockedUser = await unblockUser(id);
 
   revalidatePath("/");
+  revalidatePath(`/u/${currentDbUser.username}/community`);
 
   if (unblockedUser) {
     revalidatePath(`/${unblockedUser.blocked.username}`);

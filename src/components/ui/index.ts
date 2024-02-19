@@ -43,6 +43,14 @@ export { SidebarWrapper } from "@/components/ui/SidebarWrapper";
 export { Skeleton } from "@/components/ui/Skeleton";
 export { Slider } from "@/components/ui/Slider";
 export { Switch } from "@/components/ui/Switch";
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/Table";
 export { Textarea } from "@/components/ui/Textarea";
 export {
   Tooltip,

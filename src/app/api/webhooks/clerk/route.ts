@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
+import { resetIngress } from "@/actions/ingress";
 
 export const POST = async (req: Request) => {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -73,6 +74,7 @@ export const POST = async (req: Request) => {
   }
 
   if (eventType === "user.deleted") {
+    await resetIngress(payload.data.id);
     await db.user.delete({
       where: {
         externalUserId: payload.data.id,
