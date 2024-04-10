@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "utfs.io" }],
   },
   webpack: (config) => {
-    config.module.push({
+    config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
       type: "javascript/auto",
